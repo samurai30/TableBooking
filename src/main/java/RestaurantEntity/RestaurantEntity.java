@@ -4,20 +4,40 @@ package RestaurantEntity;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
-import java.util.Collection;
+import java.io.Serializable;
+import java.util.*;
+
 
 @Entity
 @Table(name = "restaurant_table")
-public class RestaurantEntity {
+public class RestaurantEntity implements Serializable {
     @Id
     @Column(name = "rest_id")
     @GeneratedValue(generator = "incrementor")
     @GenericGenerator(name = "incrementor", strategy = "increment")
     private long Rest_id;
 
+    @Column(name = "rest_name")
+    private String name;
+
+
+    @OneToMany(cascade = CascadeType.ALL)
+    @JoinColumn(name = "rest_id")
+    private Set<TablesEntity> tablesEntities;
+
+
+    public Set<TablesEntity> getTablesEntities() {
+        return tablesEntities;
+    }
+
+    public void setTablesEntities(Set<TablesEntity> tablesEntities) {
+        this.tablesEntities = tablesEntities;
+    }
+
     public long getRest_id() {
         return Rest_id;
     }
+
 
     public void setRest_id(long rest_id) {
         Rest_id = rest_id;
@@ -31,12 +51,7 @@ public class RestaurantEntity {
         this.name = name;
     }
 
-    @Column(name = "rest_name")
-    private String name;
 
 
-    @OneToMany(mappedBy = "restaurant_table")
-
-    private Collection<TablesEntity> tablesEntity;
 
 }
