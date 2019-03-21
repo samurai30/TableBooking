@@ -7,6 +7,7 @@
         <setting name="provider-name" value="Hibernate" />
         <datasource-mapping>
           <factory-entry name="Restaurant.Persistence" />
+          <factory-entry name="org.hibernate.restaurant" value="4cff763a-1ed5-40e6-a1fa-db1075b3bf9d" />
         </datasource-mapping>
         <naming-strategy-map />
         <deploymentDescriptor name="persistence.xml" url="file://$MODULE_DIR$/src/main/resources/META-INF/persistence.xml" />
