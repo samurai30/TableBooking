@@ -1,5 +1,5 @@
-import RestaurantEntity.RestaurantEntity;
-import RestaurantEntity.TablesEntity;
+import RestaurantEntityType.RestaurantEntity;
+import RestaurantEntityType.TablesEntity;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;

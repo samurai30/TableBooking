@@ -1,4 +1,4 @@
-package RestaurantEntity;
+package RestaurantEntityType;
 
 
 import org.hibernate.annotations.GenericGenerator;

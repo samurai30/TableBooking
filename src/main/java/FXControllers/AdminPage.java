@@ -1,13 +1,19 @@
 package FXControllers;
 
+import RestaurantEntityType.RestaurantEntity;
+import RestaurantEntityType.TablesEntity;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.scene.text.Text;
 
+import javax.persistence.EntityManager;
 import java.net.URL;
+import java.util.HashSet;
+import java.util.List;
 import java.util.ResourceBundle;
+import java.util.Set;
 
 public class AdminPage implements Initializable {
 
@@ -43,20 +49,52 @@ public class AdminPage implements Initializable {
 
         public void AddToDatabase(ActionEvent event)
         {
+            EntityManagerDefault em = new EntityManagerDefault();
 
-           if(ChoiceList.getItems().isEmpty() || RestName.getText().isEmpty())
-           {
-               ErrorAddList.setText("Please Select:");
+            try {
 
-           }else {
-               ErrorAddList.setText("");
+                if(ChoiceList.getItems().isEmpty() || RestName.getText().isEmpty())
+                {
+                    ErrorAddList.setText("Please Select:");
 
-               for (int i=0;i<ChoiceList.getItems().size();i++){
+                }else {
+                    em.entityManager.getTransaction().begin();
+
+                    ErrorAddList.setText("");
+
+                    RestaurantEntity rst = new RestaurantEntity();
 
 
-               }
 
-           }
+                    rst.setName(RestName.getText());
+
+                    List<String> list = ChoiceList.getItems();
+
+                    System.out.println(list);
+
+                    Set<TablesEntity> LsTbe = new HashSet<>();
+
+                    for (String s: list){
+                        TablesEntity tbe =new TablesEntity();
+
+                        tbe.setType(s);
+
+                        LsTbe.add(tbe);
+
+                    }
+
+                    rst.setTablesEntities(LsTbe);
+                    em.entityManager.persist(rst);
+                    em.entityManager.getTransaction().commit();
+
+                }
+            }catch (Exception e){
+
+            }finally {
+                em.entityManagerFactory.close();
+            }
+
+
 
 
         }

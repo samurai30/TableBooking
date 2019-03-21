@@ -1,9 +1,8 @@
-package RestaurantEntity;
+package RestaurantEntityType;
 
 
 import javax.persistence.*;
 import java.io.Serializable;
-import java.util.Collection;
 
 @Entity
 @Table(name = "rest_tables")
