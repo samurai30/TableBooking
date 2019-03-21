@@ -3,10 +3,7 @@ package FXControllers;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Button;
-import javafx.scene.control.ChoiceBox;
-import javafx.scene.control.ListView;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.text.Text;
 
 import java.net.URL;
@@ -24,19 +21,45 @@ public class AdminPage implements Initializable {
     ChoiceBox Category;
     @FXML
     Button AddToList;
+    @FXML
+    Label ErrorAddList;
 
-    public void AddToList(ActionEvent event){
-        String tt = (String) Category.getSelectionModel().getSelectedItem();
+         public void AddToList(ActionEvent event){
+            String tt = String.valueOf(Category.getSelectionModel().getSelectedItem());
 
-        if(ChoiceList.getItems().contains(tt)){
-            System.out.println("Sorry cant add");
-        }else {
+                if(ChoiceList.getItems().contains(tt)){
+                    ErrorAddList.setText("This Item already inserted");
+                }
+                else if(Category.getSelectionModel().isEmpty())
+                {
+                    ErrorAddList.setText("Please Choose One");
+                }
+                else {
+                    ErrorAddList.setText("");
+                    ChoiceList.getItems().addAll(tt);
+                }
 
-            ChoiceList.getItems().addAll(tt);
+            }
+
+        public void AddToDatabase(ActionEvent event)
+        {
+
+           if(ChoiceList.getItems().isEmpty() || RestName.getText().isEmpty())
+           {
+               ErrorAddList.setText("Please Select:");
+
+           }else {
+               ErrorAddList.setText("");
+
+               for (int i=0;i<ChoiceList.getItems().size();i++){
+
+
+               }
+
+           }
+
+
         }
-
-        }
-
 
 
 
