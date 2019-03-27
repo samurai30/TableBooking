@@ -2,14 +2,12 @@ package RestaurantEntityType;
 
 import org.hibernate.annotations.GenericGenerator;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.io.Serializable;
 
 
 @Entity
+@Table(name = "customers")
 public class CustomerEntity implements Serializable {
 
     private Long id;
@@ -25,15 +23,21 @@ public class CustomerEntity implements Serializable {
     public void setId(Long id) {
         this.id = id;
     }
-    @Column(name = "cust_username")
+
     private String username;
-    @Column(name = "cust_password")
+
     private String password;
-    @Column(name = "cust_contact")
+
     private Long contact;
-    @Column(name = "cust_email")
+
     private String email;
 
+    private String fName;
+
+    private String lName;
+
+
+    @Column(name = "cust_username",unique = true)
     public String getUsername() {
         return username;
     }
@@ -42,6 +46,7 @@ public class CustomerEntity implements Serializable {
         this.username = username;
     }
 
+    @Column(name = "cust_password")
     public String getPassword() {
         return password;
     }
@@ -49,7 +54,7 @@ public class CustomerEntity implements Serializable {
     public void setPassword(String password) {
         this.password = password;
     }
-
+    @Column(name = "cust_contact")
     public Long getContact() {
         return contact;
     }
@@ -58,6 +63,7 @@ public class CustomerEntity implements Serializable {
         this.contact = contact;
     }
 
+    @Column(name = "cust_email",unique = true)
     public String getEmail() {
         return email;
     }
@@ -66,6 +72,7 @@ public class CustomerEntity implements Serializable {
         this.email = email;
     }
 
+    @Column(name = "cust_fName")
     public String getfName() {
         return fName;
     }
@@ -74,6 +81,7 @@ public class CustomerEntity implements Serializable {
         this.fName = fName;
     }
 
+    @Column(name = "cust_lName")
     public String getlName() {
         return lName;
     }
@@ -82,10 +90,7 @@ public class CustomerEntity implements Serializable {
         this.lName = lName;
     }
 
-    @Column(name = "cust_fName")
-    private String fName;
-    @Column(name = "cust_lName")
-    private String lName;
+
 
 
 }

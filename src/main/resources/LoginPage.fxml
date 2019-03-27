@@ -14,8 +14,11 @@
          <children>
             <TextField fx:id="usernameField" layoutX="226.0" layoutY="109.0" promptText="USERNAME" />
             <TextField fx:id="passwordField" layoutX="226.0" layoutY="148.0" promptText="PASSWORD" />
-            <Button fx:id="loginButton" layoutX="248.0" layoutY="208.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="105.0" text="Login" />
-            <Hyperlink fx:id="forgotPasswordLink" layoutX="241.0" layoutY="246.0" text="Forgotten Password?" />
+            <Button fx:id="loginButton" layoutX="248.0" layoutY="192.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="105.0" text="Login">
+               <font>
+                  <Font name="OCR A Extended" size="12.0" />
+               </font></Button>
+            <Hyperlink fx:id="forgotPasswordLink" layoutX="241.0" layoutY="229.0" text="Forgotten Password?" />
             <Label layoutX="263.0" layoutY="28.0" text="LOGIN" textFill="#27a3a7">
                <font>
                   <Font name="Ebrima Bold" size="24.0" />
@@ -25,7 +28,15 @@
       </Pane>
       <Pane prefHeight="200.0" prefWidth="200.0">
          <children>
-            <Button fx:id="RegisterButton" layoutX="266.0" layoutY="27.0" mnemonicParsing="false" onAction="#NewRegister" text="REGISTER" />
+            <Button fx:id="RegisterButton" layoutX="519.0" layoutY="41.0" mnemonicParsing="false" onAction="#NewRegister" text="REGISTER">
+               <font>
+                  <Font name="OCR A Extended" size="12.0" />
+               </font></Button>
+            <Label layoutX="422.0" layoutY="43.0" text="Not Registered?">
+               <font>
+                  <Font name="System Bold" size="12.0" />
+               </font>
+            </Label>
          </children>
       </Pane>
    </children>

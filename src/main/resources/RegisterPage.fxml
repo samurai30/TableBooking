@@ -1,12 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.Button?>
-<?import javafx.scene.control.ChoiceBox?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.control.RadioButton?>
 <?import javafx.scene.control.Tab?>
 <?import javafx.scene.control.TabPane?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.ToggleGroup?>
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
@@ -24,22 +25,22 @@
       </Pane>
       <TabPane prefHeight="386.0" prefWidth="700.0" tabClosingPolicy="UNAVAILABLE">
         <tabs>
-          <Tab text="As Customer">
+          <Tab text="Registration">
                <content>
                   <Pane prefHeight="342.0" prefWidth="600.0">
                      <children>
                         <TextField fx:id="cFname" layoutX="262.0" layoutY="31.0" prefHeight="25.0" prefWidth="75.0" promptText="First Name" />
                         <TextField fx:id="cEmail" layoutX="262.0" layoutY="63.0" prefHeight="25.0" prefWidth="181.0" promptText="Email" />
-                        <TextField fx:id="cLname" layoutX="368.0" layoutY="31.0" prefHeight="25.0" prefWidth="75.0" promptText="Last Name" />
-                        <TextField fx:id="cUsername" layoutX="262.0" layoutY="130.0" prefHeight="25.0" prefWidth="181.0" promptText="Username" />
+                        <TextField fx:id="cLname" layoutX="348.0" layoutY="31.0" prefHeight="25.0" prefWidth="95.0" promptText="Last Name" />
+                        <TextField fx:id="cUsername" layoutX="262.0" layoutY="130.0" onKeyReleased="#uniqueUsername" prefHeight="25.0" prefWidth="181.0" promptText="Username" />
                         <TextField fx:id="cContact" layoutX="307.0" layoutY="96.0" prefHeight="25.0" prefWidth="136.0" promptText="Contact" />
                         <TextField fx:id="countryCode" disable="true" editable="false" layoutX="264.0" layoutY="96.0" prefHeight="25.0" prefWidth="41.0" promptText="+91">
                            <font>
                               <Font name="System Bold" size="12.0" />
                            </font>
                         </TextField>
-                        <Button fx:id="cRegister" layoutX="289.0" layoutY="261.0" mnemonicParsing="false" onAction="#Register" prefHeight="25.0" prefWidth="126.0" text="Register" />
-                        <Label layoutX="305.0" layoutY="5.0" text="Customer Details" />
+                        <Button fx:id="cRegister" layoutX="293.0" layoutY="317.0" mnemonicParsing="false" onAction="#Register" prefHeight="25.0" prefWidth="123.0" text="Register" />
+                        <Label layoutX="317.0" layoutY="6.0" text="Enter Details" />
                         <Label fx:id="errorPasword" layoutX="264.0" layoutY="244.0" textFill="RED">
                            <font>
                               <Font name="System Bold" size="12.0" />
@@ -47,39 +48,12 @@
                         </Label>
                         <PasswordField fx:id="cCpassword" layoutX="262.0" layoutY="207.0" onKeyReleased="#ConfirmPassword" prefHeight="25.0" prefWidth="181.0" promptText="Confirm Password" />
                         <PasswordField fx:id="cPassword" layoutX="263.0" layoutY="166.0" prefHeight="25.0" prefWidth="182.0" promptText="Password" />
-                     </children>
-                  </Pane>
-               </content>
-            </Tab>
-          <Tab text="As Vendor">
-               <content>
-                  <Pane prefHeight="278.0" prefWidth="700.0">
-                     <children>
-                        <TextField layoutX="14.0" layoutY="26.0" prefHeight="25.0" prefWidth="75.0" promptText="First Name" />
-                        <TextField layoutX="14.0" layoutY="64.0" prefHeight="25.0" prefWidth="181.0" promptText="Email" />
-                        <TextField layoutX="120.0" layoutY="26.0" prefHeight="25.0" prefWidth="75.0" promptText="Last Name" />
-                        <TextField layoutX="14.0" layoutY="133.0" prefHeight="25.0" prefWidth="181.0" promptText="Username" />
-                        <TextField layoutX="59.0" layoutY="96.0" prefHeight="25.0" prefWidth="136.0" promptText="Contact" />
-                        <TextField disable="true" editable="false" layoutX="14.0" layoutY="96.0" prefHeight="25.0" prefWidth="41.0" promptText="+91">
-                           <font>
-                              <Font name="System Bold" size="12.0" />
-                           </font>
-                        </TextField>
-                        <TextField layoutX="14.0" layoutY="167.0" prefHeight="25.0" prefWidth="181.0" promptText="Password" />
-                        <TextField layoutX="14.0" layoutY="201.0" prefHeight="25.0" prefWidth="181.0" promptText="Confirm Password" />
-                        <Button layoutX="275.0" layoutY="300.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="150.0" text="Register" />
-                        <Label layoutX="66.0" layoutY="6.0" text="Vendor Details" />
-                        <TextField layoutX="492.0" layoutY="26.0" promptText="Restaurant Name" />
-                        <TextField layoutX="492.0" layoutY="133.0" promptText="Location" />
-                        <TextField layoutX="492.0" layoutY="167.0" promptText="Landmark" />
-                        <Label layoutX="519.0" layoutY="6.0" text="Restaurant Details" />
-                        <ChoiceBox layoutX="587.0" layoutY="201.0" prefHeight="25.0" prefWidth="56.0" />
-                        <Label layoutX="493.0" layoutY="207.0" text="Star Rating">
-                           <font>
-                              <Font name="Franklin Gothic Demi Cond" size="12.0" />
-                           </font>
-                        </Label>
-                        <Label layoutX="525.0" layoutY="100.0" text="Address Details" />
+                        <RadioButton layoutX="263.0" layoutY="286.0" mnemonicParsing="false" selected="true" text="Customer">
+                           <toggleGroup>
+                              <ToggleGroup fx:id="registerTYPE" />
+                           </toggleGroup>
+                        </RadioButton>
+                        <RadioButton layoutX="387.0" layoutY="286.0" mnemonicParsing="false" text="Vendor" toggleGroup="$registerTYPE" />
                      </children>
                   </Pane>
                </content>
