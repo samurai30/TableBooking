@@ -32,15 +32,7 @@ public class HomePage implements Initializable {
     public Spinner BookTime;
 
     public void CheckAvailibityFunction(ActionEvent event){
-       /* try {
-            Parent Forward = FXMLLoader.load(getClass().getResource("../FXLoginPage/RestaurantLogin.fxml"));
-            Scene ForwardScene = new Scene(Forward);
-            Stage window = (Stage)((Node)event.getSource()).getScene().getWindow();
-            window.setScene(ForwardScene);
-            window.show();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }*/
+
         System.out.println("works");
 
     }

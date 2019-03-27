@@ -30,7 +30,7 @@ public class AdminPage implements Initializable {
     @FXML
     Label ErrorAddList;
 
-    EntityManagerDefault em = new EntityManagerDefault();
+
 
          public void AddToList(ActionEvent event){
             String tt = String.valueOf(Category.getSelectionModel().getSelectedItem());
@@ -52,6 +52,7 @@ public class AdminPage implements Initializable {
         public void AddToDatabase(ActionEvent event)
         {
 
+            EntityManagerDefault em = new EntityManagerDefault();
 
             try {
 
@@ -91,6 +92,9 @@ public class AdminPage implements Initializable {
             }catch (Exception e){
 
 
+            }finally {
+                em.entityManagerFactory.close();
+
             }
 
 
@@ -107,18 +111,8 @@ public class AdminPage implements Initializable {
         String list[] = {"Fine Dining","Out Door Dining","In Door Dining"};
 
 
-
         Category.getItems().addAll(list);
 
-        try{
-
-
-
-        }catch (Exception e){
-
-        }finally {
-            em.entityManagerFactory.close();
-        }
 
     }
 }
