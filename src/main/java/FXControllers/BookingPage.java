@@ -16,7 +16,7 @@ import java.net.URL;
 import java.time.LocalDate;
 import java.util.ResourceBundle;
 
-public class HomePage implements Initializable {
+public class BookingPage implements Initializable {
 
     @FXML
     public Button CheckAvailibility;

@@ -7,19 +7,22 @@ import java.io.Serializable;
 @Entity
 @Table(name = "rest_tables")
 public class TablesEntity implements Serializable {
-    @Id
-    @Column(name = "table_id")
-    @GeneratedValue
+
     private long id;
+    private int rest_id;
+    private int cat_id;
 
-    @Column(name = "table_type")
-    private String type;
 
+    @Column(name = "cat_id")
+    public int getCat_id() {
+        return cat_id;
+    }
+
+    public void setCat_id(int cat_id) {
+        this.cat_id = cat_id;
+    }
 
     @Column(name = "rest_id")
-    private int rest_id;
-
-
     public int getRest_id() {
         return rest_id;
     }
@@ -28,6 +31,10 @@ public class TablesEntity implements Serializable {
         this.rest_id = rest_id;
     }
 
+
+    @Id
+    @Column(name = "table_id")
+    @GeneratedValue
     public long getId() {
         return id;
     }
@@ -36,11 +43,4 @@ public class TablesEntity implements Serializable {
         this.id = id;
     }
 
-    public String getType() {
-        return type;
-    }
-
-    public void setType(String type) {
-        this.type = type;
-    }
 }

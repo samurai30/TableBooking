@@ -166,6 +166,8 @@ public class RegisterPage implements Initializable {
 
                 em.entityManager.persist(customer);
                 em.entityManager.getTransaction().commit();
+                registerSuccess(event);
+
 
             }else if(rb.getText().equals("Vendor")){
 
@@ -182,6 +184,7 @@ public class RegisterPage implements Initializable {
 
                 em.entityManager.persist(vendor);
                 em.entityManager.getTransaction().commit();
+                registerSuccess(event);
 
             }
 

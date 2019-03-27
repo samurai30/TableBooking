@@ -75,14 +75,6 @@ public class AdminPage implements Initializable {
 
                     Set<TablesEntity> LsTbe = new HashSet<>();
 
-                    for (String s: list){
-                        TablesEntity tbe =new TablesEntity();
-
-                        tbe.setType(s);
-
-                        LsTbe.add(tbe);
-
-                    }
 
                     rst.setTablesEntities(LsTbe);
                     em.entityManager.persist(rst);
@@ -107,9 +99,7 @@ public class AdminPage implements Initializable {
     public void initialize(URL location, ResourceBundle resources) {
 
 
-
-        String list[] = {"Fine Dining","Out Door Dining","In Door Dining"};
-
+        String[] list = {"Fine Dining", "Out Door Dining", "In Door Dining"};
 
         Category.getItems().addAll(list);
 

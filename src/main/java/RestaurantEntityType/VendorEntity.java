@@ -4,6 +4,7 @@ import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.Set;
 
 
 @Entity
@@ -20,6 +21,22 @@ public class VendorEntity implements Serializable {
     private Long contact;
     private String username;
     private String password;
+
+
+
+    @OneToMany(cascade = CascadeType.ALL)
+    @JoinColumn(name = "ven_id")
+    public Set<RestaurantEntity> getRestaurantEntitySet() {
+        return restaurantEntitySet;
+    }
+
+    public void setRestaurantEntitySet(Set<RestaurantEntity> restaurantEntitySet) {
+        this.restaurantEntitySet = restaurantEntitySet;
+    }
+
+    private Set<RestaurantEntity> restaurantEntitySet;
+
+
 
     @Column(name = "ven_first_name")
     public String getFirstName() {
