@@ -12,6 +12,17 @@ public class TablesEntity implements Serializable {
     private int rest_id;
     private int cat_id;
 
+    @Column(name = "table_status")
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
+
+    private String status;
+
 
     @Column(name = "cat_id")
     public int getCat_id() {

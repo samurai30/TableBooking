@@ -210,7 +210,16 @@ public class RegisterPage implements Initializable {
             successAlert.setHeaderText("Registered Successfully");
             successAlert.setContentText("Please login");
             successAlert.showAndWait();
-            Parent loginSuccess = FXMLLoader.load(getClass().getResource("../LoginPage.fxml"));
+            RadioButton rb = (RadioButton) registerTYPE.getSelectedToggle();
+            Parent loginSuccess;
+            if(rb.getText().equals("Customer")){
+                 loginSuccess = FXMLLoader.load(getClass().getResource("../LoginPage.fxml"));
+
+            }else
+            {
+                 loginSuccess = FXMLLoader.load(getClass().getResource("../VendorLogin.fxml"));
+
+            }
             Scene successScene = new Scene(loginSuccess,600,400);
             Stage successWindow = (Stage)((Node)event.getSource()).getScene().getWindow();
             successWindow.setScene(successScene);

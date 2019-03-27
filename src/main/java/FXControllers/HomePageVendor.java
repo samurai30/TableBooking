@@ -11,6 +11,7 @@ import javafx.scene.control.TextField;
 
 import javax.validation.ConstraintViolation;
 import java.net.URL;
+import java.util.List;
 import java.util.ResourceBundle;
 import java.util.Set;
 
@@ -44,6 +45,7 @@ public class HomePageVendor implements Initializable {
 
 
         try {
+            String stars = String.valueOf(restStar.getSelectionModel().getSelectedItem().toString());
 
             EntityManagerDefault em = new EntityManagerDefault();
             RestaurantEntity restaurant = new RestaurantEntity();
@@ -51,7 +53,7 @@ public class HomePageVendor implements Initializable {
             restaurant.setName(restName.getText());
             restaurant.setLocation(restLocation.getText());
             restaurant.setLandmark(restLandmark.getText());
-            restaurant.setStartRating(4);
+            restaurant.setStartRating(Integer.parseInt(stars));
 
             Set<ConstraintViolation<RestaurantEntity>> constraintViolations = em.validator.validate(restaurant);
 
@@ -78,6 +80,13 @@ public class HomePageVendor implements Initializable {
                         }
                 }
             }else{
+                restaurant.setVen_id(1);
+                restaurant.setVerified("unverified");
+                em.entityManager.getTransaction().begin();
+                em.entityManager.persist(restaurant);
+                em.entityManager.getTransaction().commit();
+
+                em.entityManager.close();
                 System.out.println("Valid");
             }
 
@@ -99,5 +108,8 @@ public class HomePageVendor implements Initializable {
     @Override
     public void initialize(URL location, ResourceBundle resources) {
 
+        String[] stars = {"1","2","3","4","5"};
+
+        restStar.getItems().addAll(stars);
     }
 }
