@@ -1,6 +1,8 @@
 package RestaurantEntityType;
 
 
+import org.hibernate.annotations.GenericGenerator;
+
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.io.Serializable;
@@ -58,7 +60,8 @@ public class TablesEntity implements Serializable {
 
     @Id
     @Column(name = "table_id")
-    @GeneratedValue
+    @GeneratedValue(generator = "incrementor")
+    @GenericGenerator(name = "incrementor", strategy = "increment")
     public long getId() {
         return id;
     }

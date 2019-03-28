@@ -173,31 +173,39 @@ public class HomePageVendor implements Initializable {
 
 
             List<Tables> table = TablesList.getItems();
-            EntityManagerDefault em = new EntityManagerDefault();
 
             table.forEach((x)->{
 
-                     em.entityManager.getTransaction().begin();
-                     @SuppressWarnings("unchecked")
-                     List<CategoryEntity> catId = em.entityManager.createQuery("SELECT e FROM CategoryEntity e WHERE e.categoryName= :catName")
-                            .setParameter("catName",x.getTableCat())
-                            .getResultList();
+                     try{
+                         EntityManagerDefault em = new EntityManagerDefault();
 
-                     TablesEntity tablesEntity = new TablesEntity();
-                     Set<RestaurantEntity> restaurantEntities = VendorLogin.vendorEntity.getRestaurantEntitySet();
-                     restaurantEntities.forEach((b)->{
+                         em.entityManager.getTransaction().begin();
+                         @SuppressWarnings("unchecked")
+                         List<CategoryEntity> catId = em.entityManager.createQuery("SELECT e FROM CategoryEntity e WHERE e.categoryName= :catName")
+                                 .setParameter("catName",x.getTableCat())
+                                 .getResultList();
+                         @SuppressWarnings("unchecked")
+                         List<RestaurantEntity> resEnt = em.entityManager.createQuery("SELECT e FROM RestaurantEntity e WHERE e.ven_id=:venID")
+                                 .setParameter("venID",VendorLogin.vendorEntity.getId())
+                                 .getResultList();
 
-                         tablesEntity.setRest_id(b.getRest_id());
+                         TablesEntity tablesEntity = new TablesEntity();
+
+                         tablesEntity.setRest_id(resEnt.get(0).getRest_id());
+                         tablesEntity.setCat_id( catId.get(0).getId());
+                         tablesEntity.setStatus("Available");
+                         tablesEntity.setTableSize(x.getTablesize());
+
+                         em.entityManager.merge(tablesEntity);
+                         em.entityManager.getTransaction().commit();
 
 
-                     });
+                     }catch (Exception e){
 
-                     tablesEntity.setCat_id( catId.get(0).getId());
-                     tablesEntity.setStatus("Available");
-                     tablesEntity.setTableSize(x.getTablesize());
-                     em.entityManager.merge(tablesEntity);
-                     em.entityManager.getTransaction().commit();
-                     em.entityManager.close();
+                     }finally {
+
+                     }
+
 
 
             });
