@@ -31,11 +31,11 @@ public class RestaurantEntity implements Serializable {
 
 
     @Column(name = "ven_id")
-    public int getVen_id() {
+    public long getVen_id() {
         return ven_id;
     }
 
-    public void setVen_id(int ven_id) {
+    public void setVen_id(long ven_id) {
         this.ven_id = ven_id;
     }
 
@@ -44,7 +44,7 @@ public class RestaurantEntity implements Serializable {
     private String verified;
 
 
-    private int ven_id;
+    private long ven_id;
 
 
     @Column(name = "verification")

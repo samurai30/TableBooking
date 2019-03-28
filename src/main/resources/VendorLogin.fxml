@@ -24,6 +24,7 @@
                   <Font name="Ebrima Bold" size="24.0" />
                </font>
             </Label>
+            <Label fx:id="errorMessage" layoutX="227.0" layoutY="266.0" textFill="RED" />
          </children>
       </Pane>
       <Pane prefHeight="200.0" prefWidth="200.0">

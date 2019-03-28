@@ -10,6 +10,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Hyperlink;
+import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
@@ -29,7 +30,8 @@ public class VendorLogin implements Initializable {
     Hyperlink forgotPasswordLink;
     @FXML
     Button RegisterButton;
-
+    @FXML
+    Label errorMessage;
     public static VendorEntity vendorEntity = new VendorEntity();
 
 
@@ -44,10 +46,34 @@ public class VendorLogin implements Initializable {
                     .getResultList();
             if(vendorEntities.size()>0){
 
+                vendorEntities.forEach((x)-> {
+
+                    if(x.getUsername().equals(usernameField.getText()) && x.getPassword().equals(passwordField.getText())){
+
+                        errorMessage.setText("");
+                        vendorEntity = x;
+                        try{
+                            Parent VendorForward = FXMLLoader.load(getClass().getResource("../HomePageVendor.fxml"));
+                            Scene vendorScene = new Scene(VendorForward, 900,600);
+                            Stage VendorWindow = (Stage) ((Node)event.getSource()).getScene().getWindow();
+                            VendorWindow.setScene(vendorScene);
+                            VendorWindow.show();
+
+                        }catch (Exception e){
+
+
+                        }
+
+                    }else {
+
+                        errorMessage.setText("Invalid username or password");
+                    }
+
+                });
 
             }else {
 
-
+                errorMessage.setText("Invalid username or password");
             }
 
 

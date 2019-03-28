@@ -9,8 +9,8 @@ import java.io.Serializable;
 public class TablesEntity implements Serializable {
 
     private long id;
-    private int rest_id;
-    private int cat_id;
+    private long rest_id;
+    private long cat_id;
 
     @Column(name = "table_status")
     public String getStatus() {
@@ -25,20 +25,20 @@ public class TablesEntity implements Serializable {
 
 
     @Column(name = "cat_id")
-    public int getCat_id() {
+    public long getCat_id() {
         return cat_id;
     }
 
-    public void setCat_id(int cat_id) {
+    public void setCat_id(long cat_id) {
         this.cat_id = cat_id;
     }
 
     @Column(name = "rest_id")
-    public int getRest_id() {
+    public long getRest_id() {
         return rest_id;
     }
 
-    public void setRest_id(int rest_id) {
+    public void setRest_id(long rest_id) {
         this.rest_id = rest_id;
     }
 

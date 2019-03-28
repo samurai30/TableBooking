@@ -80,7 +80,7 @@ public class HomePageVendor implements Initializable {
                         }
                 }
             }else{
-                restaurant.setVen_id(1);
+                restaurant.setVen_id(VendorLogin.vendorEntity.getId());
                 restaurant.setVerified("unverified");
                 em.entityManager.getTransaction().begin();
                 em.entityManager.persist(restaurant);
