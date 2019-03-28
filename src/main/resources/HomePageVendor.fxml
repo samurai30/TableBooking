@@ -75,7 +75,7 @@
                         <ChoiceBox fx:id="categoryDropdown" layoutX="222.0" layoutY="67.0" prefHeight="25.0" prefWidth="219.0" />
                         <Button fx:id="AddTable" layoutX="606.0" layoutY="67.0" mnemonicParsing="false" onAction="#AddTables" prefHeight="25.0" prefWidth="77.0" text="ADD" />
                         <TextField fx:id="tableSize" layoutX="475.0" layoutY="67.0" prefHeight="25.0" prefWidth="97.0" />
-                        <Button fx:id="submitTables" layoutX="505.0" layoutY="343.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="175.0" text="SUBMIT" />
+                        <Button fx:id="submitTables" layoutX="505.0" layoutY="343.0" mnemonicParsing="false" onAction="#SubmitTables" prefHeight="25.0" prefWidth="175.0" text="SUBMIT" />
                         <TableView fx:id="TablesList" layoutX="222.0" layoutY="111.0" prefHeight="200.0" prefWidth="464.0">
                           <columns>
                             <TableColumn fx:id="TableTypeColumn" prefWidth="272.79998779296875" text="Table Type" />
@@ -91,6 +91,11 @@
                            </font>
                         </Label>
                         <Label layoutX="475.0" layoutY="40.0" text="Table Size">
+                           <font>
+                              <Font name="System Bold" size="12.0" />
+                           </font>
+                        </Label>
+                        <Label fx:id="errorSubmit" layoutX="510.0" layoutY="320.0" textFill="RED">
                            <font>
                               <Font name="System Bold" size="12.0" />
                            </font>

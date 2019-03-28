@@ -2,18 +2,21 @@ package FXControllers;
 
 import RestaurantEntityType.CategoryEntity;
 import RestaurantEntityType.RestaurantEntity;
+import RestaurantEntityType.TablesEntity;
+import TableCollectionData.Tables;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.util.Callback;
 
 import javax.validation.ConstraintViolation;
 import java.net.URL;
-import java.util.List;
-import java.util.ResourceBundle;
-import java.util.Set;
+import java.util.*;
 
 public class HomePageVendor implements Initializable {
 
@@ -50,7 +53,7 @@ public class HomePageVendor implements Initializable {
     @FXML
     ChoiceBox categoryDropdown;
     @FXML
-    TableView TablesList;
+    TableView<Tables> TablesList;
     @FXML
     TextField tableSize;
     @FXML
@@ -62,20 +65,20 @@ public class HomePageVendor implements Initializable {
     @FXML
     Label errorTableSize;
     @FXML
-    TableColumn TableTypeColumn;
+    TableColumn<Tables,String> TableTypeColumn;
     @FXML
-    TableColumn TableSizeColumn;
+    TableColumn<Tables, Integer> TableSizeColumn;
     @FXML
     TableColumn TableDeleteColumn;
-
+    @FXML
+    Label errorSubmit;
+    private ObservableList<Tables> TablesModel = FXCollections.observableArrayList();
     public void AddTables(ActionEvent event){
 
 
         if(!categoryDropdown.getSelectionModel().isEmpty() && tableSize.getText().matches("^[1-9][0-9]?$|^100$")){
-
-
-
-
+            TablesModel.add(new Tables(Integer.parseInt(tableSize.getText()),categoryDropdown.getSelectionModel().getSelectedItem().toString()));
+            TablesList.setItems(TablesModel);
         }else{
 
             System.out.println("doesnt");
@@ -162,14 +165,61 @@ public class HomePageVendor implements Initializable {
 
     }
 
+    public void SubmitTables(ActionEvent event){
 
+        if(!TablesList.getItems().isEmpty()){
+
+            errorSubmit.setText("");
+
+
+            List<Tables> table = TablesList.getItems();
+            EntityManagerDefault em = new EntityManagerDefault();
+
+            table.forEach((x)->{
+
+                     em.entityManager.getTransaction().begin();
+                     @SuppressWarnings("unchecked")
+                     List<CategoryEntity> catId = em.entityManager.createQuery("SELECT e FROM CategoryEntity e WHERE e.categoryName= :catName")
+                            .setParameter("catName",x.getTableCat())
+                            .getResultList();
+
+                     TablesEntity tablesEntity = new TablesEntity();
+                     Set<RestaurantEntity> restaurantEntities = VendorLogin.vendorEntity.getRestaurantEntitySet();
+                     restaurantEntities.forEach((b)->{
+
+                         tablesEntity.setRest_id(b.getRest_id());
+
+
+                     });
+
+                     tablesEntity.setCat_id( catId.get(0).getId());
+                     tablesEntity.setStatus("Available");
+                     tablesEntity.setTableSize(x.getTablesize());
+                     em.entityManager.merge(tablesEntity);
+                     em.entityManager.getTransaction().commit();
+                     em.entityManager.close();
+
+
+            });
+
+
+
+        }
+        else {
+            errorSubmit.setText("Please add tables");
+        }
+
+
+    }
 
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
 
-        TableTypeColumn.setCellValueFactory(new PropertyValueFactory<>("tablesize"));
-
+        TableTypeColumn.setCellValueFactory(new PropertyValueFactory<>("tableCat"));
+        TableSizeColumn.setCellValueFactory(new PropertyValueFactory<>("tablesize"));
+        TableDeleteColumn.setCellValueFactory(new PropertyValueFactory<>("Delete"));
+        TableDeleteColumn.setCellFactory(cellFactory);
 
         String[] stars = {"1","2","3","4","5"};
         String [] type = {"Veg","Non-Veg"};
@@ -200,4 +250,31 @@ public class HomePageVendor implements Initializable {
         em.entityManager.close();
 
     }
+    Callback<TableColumn<Tables, String>, TableCell<Tables, String>> cellFactory
+            = //
+            new Callback<TableColumn<Tables, String>, TableCell<Tables, String>>() {
+                @Override
+                public TableCell call(final TableColumn<Tables, String> param) {
+                    final TableCell<Tables, String> cell = new TableCell<Tables, String>() {
+
+                        final Button btn = new Button("Delete");
+                        @Override
+                        public void updateItem(String item, boolean empty) {
+                            super.updateItem(item, empty);
+                            if (empty) {
+                                setGraphic(null);
+                                setText(null);
+                            } else {
+                                btn.setOnAction(event -> {
+                                    getTableView().getItems().remove(getIndex());
+                                });
+                                setGraphic(btn);
+                                setText(null);
+                            }
+                        }
+                    };
+                    return cell;
+                }
+            };
+
 }
