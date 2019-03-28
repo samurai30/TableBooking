@@ -2,6 +2,7 @@ package RestaurantEntityType;
 
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 
 @Entity
@@ -11,6 +12,18 @@ public class TablesEntity implements Serializable {
     private long id;
     private long rest_id;
     private long cat_id;
+
+    @Column(name = "table_size")
+    public int getTableSize() {
+        return tableSize;
+    }
+
+    public void setTableSize(int tableSize) {
+        this.tableSize = tableSize;
+    }
+
+    @NotNull(message = "Please enter Size")
+    private int tableSize;
 
     @Column(name = "table_status")
     public String getStatus() {

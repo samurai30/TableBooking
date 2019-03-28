@@ -29,31 +29,39 @@
                <content>
                   <Pane prefHeight="342.0" prefWidth="600.0">
                      <children>
-                        <TextField fx:id="cFname" layoutX="262.0" layoutY="31.0" prefHeight="25.0" prefWidth="75.0" promptText="First Name" />
-                        <TextField fx:id="cEmail" layoutX="262.0" layoutY="63.0" prefHeight="25.0" prefWidth="181.0" promptText="Email" />
-                        <TextField fx:id="cLname" layoutX="348.0" layoutY="31.0" prefHeight="25.0" prefWidth="95.0" promptText="Last Name" />
-                        <TextField fx:id="cUsername" layoutX="262.0" layoutY="130.0" onKeyReleased="#uniqueUsername" prefHeight="25.0" prefWidth="181.0" promptText="Username" />
-                        <TextField fx:id="cContact" layoutX="307.0" layoutY="96.0" prefHeight="25.0" prefWidth="136.0" promptText="Contact" />
-                        <TextField fx:id="countryCode" disable="true" editable="false" layoutX="264.0" layoutY="96.0" prefHeight="25.0" prefWidth="41.0" promptText="+91">
+                        <TextField fx:id="cFname" layoutX="262.0" layoutY="23.0" prefHeight="25.0" prefWidth="75.0" promptText="First Name" />
+                        <TextField fx:id="cEmail" layoutX="262.0" layoutY="65.0" prefHeight="25.0" prefWidth="181.0" promptText="Email" />
+                        <TextField fx:id="cLname" layoutX="350.0" layoutY="23.0" prefHeight="25.0" prefWidth="95.0" promptText="Last Name" />
+                        <TextField fx:id="cUsername" layoutX="262.0" layoutY="153.0" onKeyReleased="#uniqueUsername" prefHeight="25.0" prefWidth="181.0" promptText="Username" />
+                        <TextField fx:id="cContact" layoutX="305.0" layoutY="109.0" prefHeight="25.0" prefWidth="136.0" promptText="Contact" />
+                        <TextField fx:id="countryCode" disable="true" editable="false" layoutX="262.0" layoutY="109.0" prefHeight="25.0" prefWidth="41.0" promptText="+91">
                            <font>
                               <Font name="System Bold" size="12.0" />
                            </font>
                         </TextField>
-                        <Button fx:id="cRegister" layoutX="293.0" layoutY="317.0" mnemonicParsing="false" onAction="#Register" prefHeight="25.0" prefWidth="123.0" text="Register" />
-                        <Label layoutX="317.0" layoutY="6.0" text="Enter Details" />
-                        <Label fx:id="errorPasword" layoutX="264.0" layoutY="244.0" textFill="RED">
+                        <Button fx:id="cRegister" layoutX="289.0" layoutY="317.0" mnemonicParsing="false" onAction="#Register" prefHeight="25.0" prefWidth="123.0" text="Register" />
+                        <Label layoutX="314.0" layoutY="6.0" text="Enter Details" textFill="#c4b61f">
+                           <font>
+                              <Font name="System Bold" size="12.0" />
+                           </font></Label>
+                        <Label fx:id="errorPasword" layoutX="264.0" layoutY="271.0" textFill="RED">
                            <font>
                               <Font name="System Bold" size="12.0" />
                            </font>
                         </Label>
-                        <PasswordField fx:id="cCpassword" layoutX="262.0" layoutY="207.0" onKeyReleased="#ConfirmPassword" prefHeight="25.0" prefWidth="181.0" promptText="Confirm Password" />
-                        <PasswordField fx:id="cPassword" layoutX="263.0" layoutY="166.0" prefHeight="25.0" prefWidth="182.0" promptText="Password" />
-                        <RadioButton layoutX="263.0" layoutY="286.0" mnemonicParsing="false" selected="true" text="Customer">
+                        <PasswordField fx:id="cCpassword" layoutX="264.0" layoutY="239.0" onKeyReleased="#ConfirmPassword" prefHeight="25.0" prefWidth="181.0" promptText="Confirm Password" />
+                        <PasswordField fx:id="cPassword" layoutX="264.0" layoutY="200.0" prefHeight="25.0" prefWidth="182.0" promptText="Password" />
+                        <RadioButton layoutX="263.0" layoutY="295.0" mnemonicParsing="false" selected="true" text="Customer">
                            <toggleGroup>
                               <ToggleGroup fx:id="registerTYPE" />
                            </toggleGroup>
                         </RadioButton>
-                        <RadioButton layoutX="387.0" layoutY="286.0" mnemonicParsing="false" text="Vendor" toggleGroup="$registerTYPE" />
+                        <RadioButton layoutX="386.0" layoutY="295.0" mnemonicParsing="false" text="Vendor" toggleGroup="$registerTYPE" />
+                        <Label fx:id="errorFname" layoutX="262.0" layoutY="48.0" textFill="RED" />
+                        <Label fx:id="errorLname" layoutX="350.0" layoutY="48.0" textFill="RED" />
+                        <Label fx:id="errorEmail" layoutX="262.0" layoutY="90.0" textFill="RED" />
+                        <Label fx:id="errorContact" layoutX="262.0" layoutY="134.0" textFill="RED" />
+                        <Label fx:id="errorUsername" layoutX="262.0" layoutY="178.0" textFill="RED" />
                      </children>
                   </Pane>
                </content>

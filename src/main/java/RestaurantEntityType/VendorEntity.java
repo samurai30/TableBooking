@@ -3,6 +3,7 @@ package RestaurantEntityType;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
+import javax.validation.constraints.*;
 import java.io.Serializable;
 import java.util.Set;
 
@@ -14,12 +15,23 @@ public class VendorEntity implements Serializable {
 
     private Long id;
 
-
+    @NotEmpty(message = "Enter First Name")
+    @Size(max = 20,min = 3,message = "Too short")
     private String firstName;
+    @NotEmpty(message = "Enter First Name")
+    @Size(max = 20,min = 3,message = "Too short")
     private String lastName;
+    @Email(message = "Please Enter Valid Email")
+    @NotEmpty(message = "Enter Email")
     private String email;
-    private Long contact;
+    @NotNull(message = "Enter Contact")
+    @Pattern(regexp = "(^$|[0-9]{10})",message = "Should be a Number of 10 digits")
+    private String contact;
+    @NotEmpty(message = "Enter name please")
+    @Size(min = 5,message = "Length should be greater than 5")
     private String username;
+    @NotEmpty(message = "Enter name please")
+    @Size(min = 5,message = "Length should be greater than 5")
     private String password;
 
 
@@ -66,11 +78,11 @@ public class VendorEntity implements Serializable {
     }
 
     @Column(name = "ven_contact")
-    public Long getContact() {
+    public String getContact() {
         return contact;
     }
 
-    public void setContact(Long contact) {
+    public void setContact(String contact) {
         this.contact = contact;
     }
 
@@ -91,8 +103,6 @@ public class VendorEntity implements Serializable {
     public void setPassword(String password) {
         this.password = password;
     }
-
-
 
     @Id
     @Column(name = "ven_id")

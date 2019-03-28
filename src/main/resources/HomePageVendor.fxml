@@ -39,7 +39,7 @@
                   </AnchorPane>
             </content>
           </Tab>
-            <Tab text="Restaurant Application Form">
+            <Tab fx:id="restApplyTab" text="Restaurant Application Form">
               <content>
                 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="387.0" prefWidth="900.0">
                      <children>
@@ -52,10 +52,18 @@
                               <Font name="System Bold" size="12.0" />
                            </font>
                         </Label>
-                        <Button fx:id="applyButton" layoutX="338.0" layoutY="269.0" mnemonicParsing="false" onAction="#AddRestaurant" prefHeight="25.0" prefWidth="225.0" text="Apply Form" />
+                        <Button fx:id="applyButton" layoutX="338.0" layoutY="359.0" mnemonicParsing="false" onAction="#AddRestaurant" prefHeight="25.0" prefWidth="225.0" text="Apply Form" />
                         <Label fx:id="restNameError" layoutX="338.0" layoutY="74.0" textFill="RED" />
                         <Label fx:id="restLocError" layoutX="338.0" layoutY="123.0" textFill="RED" />
                         <Label fx:id="restLandError" layoutX="338.0" layoutY="175.0" textFill="RED" />
+                        <Label fx:id="startError" layoutX="337.0" layoutY="240.0" textFill="RED" />
+                        <Label layoutX="337.0" layoutY="280.0" prefHeight="18.0" prefWidth="147.0" text="RESTAURANT TYPE?">
+                           <font>
+                              <Font name="System Bold" size="12.0" />
+                           </font>
+                        </Label>
+                        <ChoiceBox fx:id="restType" layoutX="484.0" layoutY="276.0" prefHeight="26.0" prefWidth="82.0" />
+                        <Label fx:id="typeError" layoutX="338.0" layoutY="315.0" textFill="RED" />
                      </children>
                   </AnchorPane>
               </content>
@@ -64,10 +72,10 @@
                <content>
                   <Pane prefHeight="200.0" prefWidth="200.0">
                      <children>
-                        <ChoiceBox layoutX="222.0" layoutY="67.0" prefHeight="25.0" prefWidth="219.0" />
+                        <ChoiceBox fx:id="categoryDropdown" layoutX="222.0" layoutY="67.0" prefHeight="25.0" prefWidth="219.0" />
                         <ListView layoutX="222.0" layoutY="127.0" prefHeight="200.0" prefWidth="458.0" />
                         <Button layoutX="606.0" layoutY="67.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="77.0" text="ADD" />
-                        <TextField layoutX="451.0" layoutY="67.0" />
+                        <TextField layoutX="475.0" layoutY="67.0" prefHeight="25.0" prefWidth="97.0" />
                         <Button layoutX="505.0" layoutY="343.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="175.0" text="SUBMIT" />
                      </children>
                   </Pane>

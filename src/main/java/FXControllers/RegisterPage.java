@@ -12,10 +12,15 @@ import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.input.KeyEvent;
 import javafx.stage.Stage;
+
+import javax.validation.ConstraintValidator;
+import javax.validation.ConstraintViolation;
+import java.math.BigInteger;
 import java.net.URL;
 import java.util.EventListener;
 import java.util.List;
 import java.util.ResourceBundle;
+import java.util.Set;
 
 public class RegisterPage implements Initializable {
     @FXML
@@ -42,22 +47,16 @@ public class RegisterPage implements Initializable {
     PasswordField cCpassword;
     @FXML
     Label errorPasword;
-
-    public boolean checkContact(String s){
-
-        boolean containsString = false;
-        if (s != null && !s.isEmpty()){
-
-            for (char c : s.toCharArray()){
-
-                if(containsString = Character.isAlphabetic(c)){
-                    break;
-                }
-            }
-        }
-
-        return containsString;
-    }
+    @FXML
+    Label errorFname;
+    @FXML
+    Label errorLname;
+    @FXML
+    Label errorEmail;
+    @FXML
+    Label errorContact;
+    @FXML
+    Label errorUsername;
 
     public boolean checkUsername(){
         EntityManagerDefault em = new EntityManagerDefault();
@@ -69,36 +68,16 @@ public class RegisterPage implements Initializable {
         return ls.size() == 0;
     }
 
+    public boolean checkUsernameVendor(){
+        EntityManagerDefault em = new EntityManagerDefault();
 
-    public boolean checkCred(){
+        @SuppressWarnings("unchecked")
+        List<VendorEntity> ls =  em.entityManager.createQuery("SELECT e FROM VendorEntity e WHERE e.username = :custname")
+                .setParameter("custname", cUsername.getText()).getResultList();
 
-        if(cFname.getLength()<3){
-            errorPasword.setText("First Name must be 3 character long");
-            return false;
-
-        }
-        else if(cLname.getLength()<5){
-            errorPasword.setText("Last Name must be 3 character long");
-            return false;
-        }
-        else if(cContact.getLength()<10 ){
-            errorPasword.setText("Please enter 10 digit number");
-            return false;
-        }else if(checkContact(cContact.getText())){
-            errorPasword.setText("Contact must not contain Text");
-        }
-        else if(cUsername.getLength()<6){
-            errorPasword.setText("Username must be 6 character long");
-        }
-        else if(!passwordCheck()){
-            return false;
-        }
-        else if(!checkUsername() || cUsername.getLength()<5 || cCpassword.getText().isEmpty() || cUsername.getText().isEmpty()){
-            errorPasword.setText("Username already used");
-            return false;
-        }
-        return true;
+        return ls.size() == 0;
     }
+
 
     public boolean passwordCheck(){
         if(cPassword.getText().isEmpty()){
@@ -131,14 +110,28 @@ public class RegisterPage implements Initializable {
     }
 
     public void uniqueUsername(KeyEvent event){
-
+        RadioButton rb = (RadioButton) registerTYPE.getSelectedToggle();
     try {
-        if (checkUsername()){
-            errorPasword.setText("");
+        if(rb.getText().equals("Customer")){
+            if (checkUsername()){
+                errorPasword.setText("");
+            }
+            else {
+                errorPasword.setText("Username already used");
+            }
+
+        }else if (rb.getText().equals("Vendor")){
+
+            if (checkUsernameVendor()){
+                errorPasword.setText("");
+            }
+            else {
+                errorPasword.setText("Username already used");
+            }
         }
-        else {
-            errorPasword.setText("Username already used");
-        }
+
+
+
     }catch (Exception e){
         System.out.println("no result");
     }
@@ -150,49 +143,139 @@ public class RegisterPage implements Initializable {
         RadioButton rb = (RadioButton) registerTYPE.getSelectedToggle();
 
         try {
-            if (checkCred()){
-            errorPasword.setText("");
-            if(rb.getText().equals("Customer")){
+            if(rb.getText().equals("Customer") && checkUsername() && passwordCheck()){
 
-                em.entityManager.getTransaction().begin();
-                CustomerEntity customer = new CustomerEntity();
+               try {
 
-                customer.setlName(cLname.getText());
-                customer.setfName(cFname.getText());
-                customer.setEmail(cEmail.getText());
-                customer.setContact(Long.parseLong(cContact.getText()));
-                customer.setUsername(cUsername.getText());
-                customer.setPassword(cPassword.getText());
-
-                em.entityManager.persist(customer);
-                em.entityManager.getTransaction().commit();
-                registerSuccess(event);
+                   CustomerEntity customer = new CustomerEntity();
+                   customer.setlName(cLname.getText());
+                   customer.setfName(cFname.getText());
+                   customer.setEmail(cEmail.getText());
+                   customer.setContact(cContact.getText());
+                   customer.setUsername(cUsername.getText());
+                   customer.setPassword(cPassword.getText());
 
 
-            }else if(rb.getText().equals("Vendor")){
+                   Set<ConstraintViolation<CustomerEntity>> constraintValidatorSet = em.validator.validate(customer);
 
-                em.entityManager.getTransaction().begin();
+                   if(constraintValidatorSet.size()>0){
+                       for (ConstraintViolation<CustomerEntity> cust : constraintValidatorSet){
+                           if("username".equals(cust.getPropertyPath().toString())){
+                               errorUsername.setText(cust.getMessage());
+                           }else {
+                               errorUsername.setText("");
+                           }
+                           if("password".equals(cust.getPropertyPath().toString())){
+                               errorPasword.setText(cust.getMessage());
+                           }else {
+                               errorPasword.setText("");
+                           }
+                           if("contact".equals(cust.getPropertyPath().toString())){
+                               errorContact.setText(cust.getMessage());
 
-                VendorEntity vendor = new VendorEntity();
+                           }else {
+                               errorContact.setText("");
+                           }
+                           if("email".equals(cust.getPropertyPath().toString())){
+                               errorEmail.setText(cust.getMessage());
+                           }else {
+                               errorEmail.setText("");
+                           }
+                           if("fName".equals(cust.getPropertyPath().toString())){
+                               errorFname.setText(cust.getMessage());
 
-                vendor.setFirstName(cFname.getText());
-                vendor.setLastName(cLname.getText());
-                vendor.setEmail(cEmail.getText());
-                vendor.setContact(Long.parseLong(cContact.getText()));
-                vendor.setUsername(cUsername.getText());
-                vendor.setPassword(cPassword.getText());
+                           }else {
+                               errorFname.setText("");
+                           }
+                           if("lName".equals(cust.getPropertyPath().toString())){
+                               errorLname.setText(cust.getMessage());
+                           }else {
+                               errorLname.setText("");
+                           }
 
-                em.entityManager.persist(vendor);
-                em.entityManager.getTransaction().commit();
-                registerSuccess(event);
 
+
+                       }
+                   }else {
+                       em.entityManager.getTransaction().begin();
+                       em.entityManager.persist(customer);
+                       em.entityManager.getTransaction().commit();
+                       registerSuccess(event);
+                   }
+
+               }catch (Exception e){
+                   System.out.println("Something went wrong");
+               }
+
+
+            }else if(rb.getText().equals("Vendor")  && checkUsernameVendor() && passwordCheck()){
+
+
+               try {
+                   VendorEntity vendor = new VendorEntity();
+
+                   vendor.setFirstName(cFname.getText());
+                   vendor.setLastName(cLname.getText());
+                   vendor.setEmail(cEmail.getText());
+                   vendor.setContact(cContact.getText());
+                   vendor.setUsername(cUsername.getText());
+                   vendor.setPassword(cPassword.getText());
+
+                   Set<ConstraintViolation<VendorEntity>> violations = em.validator.validate(vendor);
+
+                   if(violations.size()>0){
+
+                        for (ConstraintViolation<VendorEntity> ven : violations){
+                            if("username".equals(ven.getPropertyPath().toString())){
+                                errorUsername.setText(ven.getMessage());
+                            }else {
+                                errorUsername.setText("");
+                            }
+                            if("password".equals(ven.getPropertyPath().toString())){
+                                errorPasword.setText(ven.getMessage());
+                            }else {
+                                errorPasword.setText("");
+                            }
+                            if("contact".equals(ven.getPropertyPath().toString())){
+                                errorContact.setText(ven.getMessage());
+
+                            }else {
+                                errorContact.setText("");
+                            }
+                            if("email".equals(ven.getPropertyPath().toString())){
+                                errorEmail.setText(ven.getMessage());
+                            }else {
+                                errorEmail.setText("");
+                            }
+                            if("firstName".equals(ven.getPropertyPath().toString())){
+                                errorFname.setText(ven.getMessage());
+
+                            }else {
+                                errorFname.setText("");
+                            }
+                            if("lastName".equals(ven.getPropertyPath().toString())){
+                                errorLname.setText(ven.getMessage());
+                            }else {
+                                errorLname.setText("");
+                            }
+                       }
+
+                   }else {
+                       em.entityManager.getTransaction().begin();
+
+                       em.entityManager.persist(vendor);
+                       em.entityManager.getTransaction().commit();
+                       registerSuccess(event);
+                   }
+
+               }catch (Exception e){
+                   System.out.println("Something went wrong");
+               }
+
+
+            }else {
+                System.out.println("Please enter valid details");
             }
-
-
-
-
-            }
-
 
         }catch (Exception e){
             System.out.println("Sorry cannot Insert");

@@ -29,6 +29,16 @@ public class RestaurantEntity implements Serializable {
     @NotEmpty(message = "Please enter Landmark")
     private String landmark;
 
+    @Column(name = "rest_type")
+    public String getRestType() {
+        return restType;
+    }
+
+    public void setRestType(String restType) {
+        this.restType = restType;
+    }
+
+    private String restType;
 
     @Column(name = "ven_id")
     public long getVen_id() {
