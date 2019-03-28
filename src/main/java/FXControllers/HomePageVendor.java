@@ -3,9 +3,11 @@ package FXControllers;
 import RestaurantEntityType.CategoryEntity;
 import RestaurantEntityType.RestaurantEntity;
 import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
+import javafx.scene.control.cell.PropertyValueFactory;
 
 import javax.validation.ConstraintViolation;
 import java.net.URL;
@@ -47,6 +49,40 @@ public class HomePageVendor implements Initializable {
     Label typeError;
     @FXML
     ChoiceBox categoryDropdown;
+    @FXML
+    TableView TablesList;
+    @FXML
+    TextField tableSize;
+    @FXML
+    Button AddTable;
+    @FXML
+    Button submitTables;
+    @FXML
+    Label errorCategorySelect;
+    @FXML
+    Label errorTableSize;
+    @FXML
+    TableColumn TableTypeColumn;
+    @FXML
+    TableColumn TableSizeColumn;
+    @FXML
+    TableColumn TableDeleteColumn;
+
+    public void AddTables(ActionEvent event){
+
+
+        if(!categoryDropdown.getSelectionModel().isEmpty() && tableSize.getText().matches("^[1-9][0-9]?$|^100$")){
+
+
+
+
+        }else{
+
+            System.out.println("doesnt");
+        }
+
+    }
+
     public void AddRestaurant(ActionEvent event){
 
 
@@ -132,8 +168,12 @@ public class HomePageVendor implements Initializable {
     @Override
     public void initialize(URL location, ResourceBundle resources) {
 
+        TableTypeColumn.setCellValueFactory(new PropertyValueFactory<>("tablesize"));
+
+
         String[] stars = {"1","2","3","4","5"};
         String [] type = {"Veg","Non-Veg"};
+
         restType.getItems().addAll(type);
         restStar.getItems().addAll(stars);
 
@@ -156,6 +196,8 @@ public class HomePageVendor implements Initializable {
         if(categoryList.size()>0){
             categoryDropdown.getItems().addAll(categoryList);
         }
+
+        em.entityManager.close();
 
     }
 }

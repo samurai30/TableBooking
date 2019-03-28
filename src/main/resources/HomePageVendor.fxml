@@ -73,10 +73,28 @@
                   <Pane prefHeight="200.0" prefWidth="200.0">
                      <children>
                         <ChoiceBox fx:id="categoryDropdown" layoutX="222.0" layoutY="67.0" prefHeight="25.0" prefWidth="219.0" />
-                        <ListView layoutX="222.0" layoutY="127.0" prefHeight="200.0" prefWidth="458.0" />
-                        <Button layoutX="606.0" layoutY="67.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="77.0" text="ADD" />
-                        <TextField layoutX="475.0" layoutY="67.0" prefHeight="25.0" prefWidth="97.0" />
-                        <Button layoutX="505.0" layoutY="343.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="175.0" text="SUBMIT" />
+                        <Button fx:id="AddTable" layoutX="606.0" layoutY="67.0" mnemonicParsing="false" onAction="#AddTables" prefHeight="25.0" prefWidth="77.0" text="ADD" />
+                        <TextField fx:id="tableSize" layoutX="475.0" layoutY="67.0" prefHeight="25.0" prefWidth="97.0" />
+                        <Button fx:id="submitTables" layoutX="505.0" layoutY="343.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="175.0" text="SUBMIT" />
+                        <TableView fx:id="TablesList" layoutX="222.0" layoutY="111.0" prefHeight="200.0" prefWidth="464.0">
+                          <columns>
+                            <TableColumn fx:id="TableTypeColumn" prefWidth="272.79998779296875" text="Table Type" />
+                            <TableColumn fx:id="TableSizeColumn" prefWidth="95.19998168945312" text="Table Size" />
+                              <TableColumn fx:id="TableDeleteColumn" prefWidth="98.4000244140625" text="Delete" />
+                          </columns>
+                        </TableView>
+                        <Label fx:id="errorCategorySelect" layoutX="222.0" layoutY="92.0" textFill="RED" />
+                        <Label fx:id="errorTableSize" layoutX="475.0" layoutY="92.0" textFill="RED" />
+                        <Label layoutX="222.0" layoutY="40.0" text="Table Type">
+                           <font>
+                              <Font name="System Bold" size="12.0" />
+                           </font>
+                        </Label>
+                        <Label layoutX="475.0" layoutY="40.0" text="Table Size">
+                           <font>
+                              <Font name="System Bold" size="12.0" />
+                           </font>
+                        </Label>
                      </children>
                   </Pane>
                </content>
