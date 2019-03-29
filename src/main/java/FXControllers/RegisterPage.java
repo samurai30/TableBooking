@@ -13,11 +13,8 @@ import javafx.scene.control.*;
 import javafx.scene.input.KeyEvent;
 import javafx.stage.Stage;
 
-import javax.validation.ConstraintValidator;
 import javax.validation.ConstraintViolation;
-import java.math.BigInteger;
 import java.net.URL;
-import java.util.EventListener;
 import java.util.List;
 import java.util.ResourceBundle;
 import java.util.Set;
@@ -154,7 +151,6 @@ public class RegisterPage implements Initializable {
                    customer.setContact(cContact.getText());
                    customer.setUsername(cUsername.getText());
                    customer.setPassword(cPassword.getText());
-
 
                    Set<ConstraintViolation<CustomerEntity>> constraintValidatorSet = em.validator.validate(customer);
 

@@ -89,7 +89,7 @@
                                         <Insets />
                                     </opaqueInsets>
                                 </DatePicker>
-                                <Spinner fx:id="BookTime" focusTraversable="false" nodeOrientation="LEFT_TO_RIGHT" prefHeight="34.0" prefWidth="93.0">
+                                <Spinner fx:id="BookTime" editable="true" focusTraversable="false" nodeOrientation="LEFT_TO_RIGHT" prefHeight="34.0" prefWidth="93.0">
                                     <HBox.margin>
                                         <Insets left="20.0" />
                                     </HBox.margin>

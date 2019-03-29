@@ -4,7 +4,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
-public class App extends Application {
+public class VendorApp extends Application {
 
     public static void main(String[] args) {
         launch(args);
@@ -13,7 +13,7 @@ public class App extends Application {
     @Override
     public void start(Stage primaryStage) throws Exception {
 
-        Parent root = FXMLLoader.load(getClass().getResource("LoginPage.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("VendorLogin.fxml"));
 
         primaryStage.setTitle("Reserve-Now");
         primaryStage.setScene(new Scene(root, 600, 400));

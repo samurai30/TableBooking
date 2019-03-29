@@ -16,14 +16,21 @@
 
 <VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="FXControllers.HomePageVendor">
    <children>
-      <Pane prefHeight="64.0" prefWidth="900.0" />
+      <Pane prefHeight="64.0" prefWidth="900.0">
+         <children>
+            <Button fx:id="logoutVendor" layoutX="818.0" layoutY="20.0" mnemonicParsing="false" onAction="#logoutVendor" text="LOGOUT">
+               <font>
+                  <Font name="System Bold" size="12.0" />
+               </font>
+            </Button>
+         </children></Pane>
       <TabPane prefHeight="483.0" prefWidth="900.0" tabClosingPolicy="UNAVAILABLE">
         <tabs>
           <Tab text="Bookings">
             <content>
               <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                      <children>
-                        <TableView layoutX="85.0" layoutY="38.0" prefHeight="402.0" prefWidth="730.0">
+                        <TableView editable="true" layoutX="85.0" layoutY="38.0" prefHeight="402.0" prefWidth="730.0">
                           <columns>
                             <TableColumn prefWidth="84.0" text="Booking ID" />
                             <TableColumn prefWidth="109.0" text="Customer Name" />

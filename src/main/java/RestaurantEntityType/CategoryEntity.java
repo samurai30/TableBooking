@@ -21,14 +21,11 @@ public class CategoryEntity implements Serializable {
         return tablesEntities;
     }
 
-
-
     public void setTablesEntities(Set<TablesEntity> tablesEntities) {
         this.tablesEntities = tablesEntities;
     }
 
     private Set<TablesEntity> tablesEntities;
-
 
     @Column(name = "cat_name")
     public String getCategoryName() {

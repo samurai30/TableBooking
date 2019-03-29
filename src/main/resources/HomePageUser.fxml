@@ -15,27 +15,35 @@
 <VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="FXControllers.HomePageUser">
    <children>
       <Pane prefHeight="74.0" prefWidth="900.0" />
-      <TabPane prefHeight="398.0" prefWidth="900.0" tabClosingPolicy="UNAVAILABLE">
+      <TabPane prefHeight="431.0" prefWidth="900.0" tabClosingPolicy="UNAVAILABLE">
         <tabs>
           <Tab text="Table Booking">
             <content>
               <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="238.0" prefWidth="900.0">
                      <children>
-                        <ChoiceBox layoutX="308.0" layoutY="45.0" prefHeight="38.0" prefWidth="283.0" AnchorPane.topAnchor="45.0">
+                        <ChoiceBox fx:id="typeChoice" layoutX="357.0" layoutY="33.0" prefHeight="16.0" prefWidth="86.0" AnchorPane.topAnchor="33.0">
                            <effect>
                               <DropShadow blurType="GAUSSIAN" color="#65bde54d" height="154.46" radius="58.855000000000004" width="82.96" />
                            </effect>
                         </ChoiceBox>
-                        <Button layoutX="340.0" layoutY="133.0" mnemonicParsing="false" prefHeight="102.0" prefWidth="220.0" style="-fx-background-color: rgba(45,150,190); -fx-background-radius: 35px;" text="BOOK NOW" textFill="WHITE">
+                        <Button fx:id="bookButton" layoutX="400.0" layoutY="287.0" mnemonicParsing="false" onAction="#BookRestaurant" prefHeight="42.0" prefWidth="102.0" style="-fx-background-color: rgba(45,150,190); -fx-background-radius: 35px;" text="BOOK NOW" textFill="WHITE">
                            <font>
-                              <Font name="Franklin Gothic Heavy" size="22.0" />
+                              <Font name="Franklin Gothic Heavy" size="15.0" />
                            </font>
                         </Button>
-                        <Label layoutX="393.0" layoutY="14.0" text="SELECT RESTAURANT" textFill="#67b1d6">
+                        <Label layoutX="413.0" layoutY="7.0" text="SELECT TYPE" textFill="#67b1d6">
                            <font>
                               <Font name="Franklin Gothic Heavy" size="12.0" />
                            </font>
                         </Label>
+                        <ListView fx:id="restList" layoutX="147.0" layoutY="93.0" prefHeight="176.0" prefWidth="614.0" />
+                        <Label layoutX="392.0" layoutY="65.0" text="SELECT RESTAURANTS" textFill="#67b1d6">
+                           <font>
+                              <Font name="Franklin Gothic Heavy" size="12.0" />
+                           </font>
+                        </Label>
+                        <Label fx:id="errorMessageBook" layoutX="378.0" layoutY="358.0" textFill="RED" />
+                        <Button fx:id="searchButton" layoutX="472.0" layoutY="33.0" mnemonicParsing="false" onAction="#SearchRest" text="SEARCH" />
                      </children>
                   </AnchorPane>
             </content>
@@ -56,5 +64,14 @@
             </Tab>
         </tabs>
       </TabPane>
+      <Pane prefHeight="87.0" prefWidth="900.0">
+         <children>
+            <Button fx:id="logoutButton" layoutX="821.0" layoutY="29.0" mnemonicParsing="false" onAction="#LogoutUser" text="LOGOUT">
+               <font>
+                  <Font name="System Bold" size="12.0" />
+               </font>
+            </Button>
+         </children>
+      </Pane>
    </children>
 </VBox>

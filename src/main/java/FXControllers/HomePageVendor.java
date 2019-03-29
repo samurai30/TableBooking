@@ -7,11 +7,15 @@ import TableCollectionData.Tables;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.stage.Stage;
 import javafx.util.Callback;
 
 import javax.validation.ConstraintViolation;
@@ -72,11 +76,32 @@ public class HomePageVendor implements Initializable {
     TableColumn TableDeleteColumn;
     @FXML
     Label errorSubmit;
+    @FXML
+    Button logoutVendor;
+
+
+    public void logoutVendor(ActionEvent event){
+
+        try{
+            Parent Logout = FXMLLoader.load(getClass().getResource("../VendorLogin.fxml"));
+            Scene scene = new Scene(Logout,600,400);
+            Stage window = (Stage) ((Node)event.getSource()).getScene().getWindow();
+            window.setScene(scene);
+            VendorLogin.vendorEntity = null;
+            window.show();
+
+        }catch (Exception e){
+
+        }finally {
+
+        }
+    }
+
     private ObservableList<Tables> TablesModel = FXCollections.observableArrayList();
     public void AddTables(ActionEvent event){
 
 
-        if(!categoryDropdown.getSelectionModel().isEmpty() && tableSize.getText().matches("^[1-9][0-9]?$|^100$")){
+        if(!categoryDropdown.getSelectionModel().isEmpty() && tableSize.getText().matches("^|[1-5]")){
             TablesModel.add(new Tables(Integer.parseInt(tableSize.getText()),categoryDropdown.getSelectionModel().getSelectedItem().toString()));
             TablesList.setItems(TablesModel);
         }else{

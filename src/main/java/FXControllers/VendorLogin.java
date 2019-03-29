@@ -8,10 +8,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.Hyperlink;
-import javafx.scene.control.Label;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.stage.Stage;
 
 import java.net.URL;
@@ -23,7 +20,7 @@ public class VendorLogin implements Initializable {
     @FXML
     TextField usernameField;
     @FXML
-    TextField passwordField;
+    PasswordField passwordField;
     @FXML
     Button loginButton;
     @FXML
